@@ -1,11 +1,7 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 import 'main_model.dart';
+import 'pixabay_image.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,33 +50,24 @@ class _PixabayPageState extends State<PixabayPage> {
         itemCount: imageList.length,
         itemBuilder: (context, index) {
           final image = imageList[index];
+          final pixabayImage = PixabayImage.fromMap(image);
           return InkWell(
             onTap: () async {
-              onTap(image['webformatURL']);
-              // print(image['likes']);
-              // Directory dir = await getTemporaryDirectory();
-              // Response response = await Dio().get(
-              //   image['webformatURL'],
-              //   options: Options(
-              //     responseType: ResponseType.bytes,
-              //   ),
-              // );
-              // final imageFile = await File('${dir.path}/image.png')
-              //     .writeAsBytes(response.data);
-              // await Share.shareXFiles([XFile(imageFile.path)]);
+              shareImage(pixabayImage.webformatURL.toString());
             },
             child: Stack(
               fit: StackFit.expand,
               children: [
                 Image.network(
-                  image['previewURL'],
+                  pixabayImage.previewURL.toString(),
                   fit: BoxFit.cover,
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
                   child: Container(
                       color: Colors.white,
-                      child: Text(' 👍${image['likes'].toString()} ')),
+                      child: Text(
+                          ' 👍${pixabayImage.likes.toString()} ')),
                 ),
               ],
             ),

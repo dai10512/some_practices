@@ -30,7 +30,7 @@ Future<List> fetchImages(String text) async {
   return imageList;
 }
 
-Future<void> onTap(String imagePath) async {
+Future<void> shareImage(String imagePath) async {
   Directory dir = await getTemporaryDirectory();
   Response response = await Dio().get(
     imagePath,
