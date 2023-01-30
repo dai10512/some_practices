@@ -43,6 +43,8 @@ dependencies:
   logger: any  #for logging purpose
   json_annotation: ^4.7.0
   json_serializable: '>4.4.0'
+  freezed_annotation: ^2.2.0
+  webview_flutter:
 
 
 
@@ -57,7 +59,8 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   retrofit_generator: '>=4.0.0 <5.0.0'
-  build_runner: '>2.3.0 <4.0.0' 
+  build_runner: ^2.3.3 
+  freezed: ^2.3.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

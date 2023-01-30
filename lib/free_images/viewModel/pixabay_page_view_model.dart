@@ -2,13 +2,12 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:retrofit/http.dart';
+import 'package:search_free_image/retrofit_pokemon/client/client.dart';
 import 'package:share_plus/share_plus.dart';
 
-part '../app_view_model.g.dart';
+part 'pixabay_page_view_model.g.dart';
 
 final imageRefreshProvider =
     FutureProvider<dynamic>((ref) => imageFetchProvider);
@@ -25,7 +24,7 @@ final imageFetchProvider = FutureProvider.family((ref, text) async {
   //     "demo header"; // config your dio headers globally
   final logger = Logger();
   final client = RestClient(dio);
-  client.getTasks().then((it) => logger.i(it));
+  client.getNamesWithType('').then((it) => logger.i(it));
 
   Response response = await dio.get(
     '',
@@ -58,29 +57,31 @@ Future<void> shareImage(String imagePath) async {
   await Share.shareXFiles([XFile(imageFile.path)]);
 }
 
-@RestApi(baseUrl: 'https://pixabay.com/api')
-abstract class RestClient {
-  factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
+// @RestApi(baseUrl: 'https://pixabay.com/api')
+// abstract class RestClient {
+//   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
-  @GET("")
-  Future<List<Task>> getTasks();
+//   @GET("")
+//   Future<List<Task>> getTasks();
 
-  @GET("/tasks/{id}")
-  Future<Task> getTask(@Path("id") String id);
+//   @GET("/tasks/{id}")
+//   Future<Task> getTask(@Path("id") String id);
 
-  @GET('/demo')
-  Future<String> queries(@Queries() Map<String, dynamic> queries);
-}
+//   @GET('/demo')
+//   Future<String> queries(@Queries() Map<String, dynamic> queries);
 
-@JsonSerializable()
-class Task {
-  String? id;
-  String? name;
-  String? avatar;
-  String? createdAt;
+//   getNamesWithType(String type) {}
+// }
 
-  Task({this.id, this.name, this.avatar, this.createdAt});
+// @JsonSerializable()
+// class Task {
+//   String? id;
+//   String? name;
+//   String? avatar;
+//   String? createdAt;
 
-  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
-  Map<String, dynamic> toJson() => _$TaskToJson(this);
-}
+//   Task({this.id, this.name, this.avatar, this.createdAt});
+
+//   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
+//   Map<String, dynamic> toJson() => _$TaskToJson(this);
+// }
