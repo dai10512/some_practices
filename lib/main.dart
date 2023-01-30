@@ -24,7 +24,6 @@ class MyApp extends StatelessWidget {
 
 class PixabayPage extends ConsumerWidget {
   PixabayPage({Key? key}) : super(key: key);
-
   final textController = TextEditingController(text: 'kabuki');
 
   @override
@@ -35,18 +34,14 @@ class PixabayPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Consumer(
-          builder: (context, ref, _) {
-            return TextFormField(
-              decoration: const InputDecoration(
-                fillColor: Colors.white,
-                filled: true,
-              ),
-              controller: textController,
-              onChanged: (_) async {
-                ref.invalidate(imageRefreshProvider);
-              },
-            );
+        title: TextFormField(
+          decoration: const InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
+          ),
+          controller: textController,
+          onChanged: (_) async {
+            ref.invalidate(imageRefreshProvider);
           },
         ),
       ),

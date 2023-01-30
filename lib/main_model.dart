@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-final imageRefreshProvider = FutureProvider<dynamic>((ref) async {
+final imageRefreshProvider = FutureProvider<dynamic>((ref) {
   return imageFetchProvider;
 });
 
