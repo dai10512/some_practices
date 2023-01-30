@@ -5,24 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-// final dateProvider = FutureProvider<dynamic>((ref) async {
-//   // await Future.delayed(const Duration(seconds: 3));
-//   return DateTime.now();
-// });
-
-final oneProvider = FutureProvider<dynamic>((ref) async {
-  // await Future.delayed(const Duration(seconds: 3));
-  // DateTime.now();
-  return 1.toString();
+final imageRefreshProvider = FutureProvider<dynamic>((ref) async {
+  return imageFetchProvider;
 });
 
-// final one1Provider = FutureProvider<dynamic>((ref) async {
-//   // await Future.delayed(const Duration(seconds: 3));
-//   // DateTime.now();
-//   return imageProvider;
-// });
-
-final imageProvider = FutureProvider.family((ref, text) async {
+final imageFetchProvider = FutureProvider.family((ref, text) async {
   const pixabayKey = '32493323-0db8d050baa6e6cc76d89fb4b';
   const perPage = 100;
   DateTime.now();
