@@ -6,7 +6,7 @@ import '../model/pokeType.dart';
 part 'client.g.dart';
 
 
-@RestApi(baseUrl: "https://pokeapi.co/api/v2")
+@RestApi(baseUrl: "https://pokeapi.com/api/v2")
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 

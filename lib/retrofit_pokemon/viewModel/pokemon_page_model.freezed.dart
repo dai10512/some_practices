@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PokemonPageModelState {
-  Ref<Object?> get ref => throw _privateConstructorUsedError;
+  Ref<Object?> get ref => throw _privateConstructorUsedError; // {
   dynamic get count => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -105,6 +105,7 @@ class _$_PokemonPageModelState implements _PokemonPageModelState {
 
   @override
   final Ref<Object?> ref;
+// {
   @override
   @JsonKey()
   final dynamic count;
@@ -141,7 +142,7 @@ abstract class _PokemonPageModelState implements PokemonPageModelState {
 
   @override
   Ref<Object?> get ref;
-  @override
+  @override // {
   dynamic get count;
   @override
   @JsonKey(ignore: true)

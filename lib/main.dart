@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
-
-import 'pokemon_page.dart';
+import 'package:search_free_image/free_images/view/pixabay_page.dart';
+import 'package:search_free_image/retrofit_pokemon/view/pokemon_page.dart';
 
 final logger = Logger();
 void main() {
@@ -18,8 +18,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: PokemonPage(),
+      // home: PixabayPage(),
     );
   }
 }
