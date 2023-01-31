@@ -1,25 +1,29 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../client/client.dart';
 import '../model/pokeType.dart';
 import '../model/typePokemon.dart';
 
-class TodosNotifier extends StateNotifier {
-  // We initialize the list of todos to an empty list
-  TodosNotifier(): super([]);
-  
+part 'pokemon_page_model.freezed.dart';
+part 'pokemon_page_model.g.dart';
 
-  // Let's allow removing todos
-  void removeTodo(String todoId) {
-    // Again, our state is immutable. So we're making a new list instead of
-    // changing the existing list.
-    state = [
-      for (final todo in state)
-        if (todo.id != todoId) todo,
-    ];
-  }
+final pokemonPageModelProvider = NotifierProvider(() => PokemonPageModel());
 
+@freezed
+class PokemonPageModelState with _$PokemonPageModelState {
+  factory PokemonPageModelState(
+    Ref<Object?> ref, {
+    @Default(-1) count,
+  }) = _PokemonPageModelState;
+}
+
+class PokemonPageModel extends Notifier<PokemonPageModelState> {
+  @override
+  build() => PokemonPageModelState(ref);
+  AsyncValue get asyncPokemon => ref.watch(pokemonProvider);
+}
 
 final pokemonProvider = FutureProvider<dynamic>(
   (ref) async {
