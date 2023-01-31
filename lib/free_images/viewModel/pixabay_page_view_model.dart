@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:search_free_image/retrofit_pokemon/client/client.dart';
+import '../../retrofit_pokemon/client/client.dart';
 import 'package:share_plus/share_plus.dart';
 
 // part 'pixabay_page_view_model.g.dart';

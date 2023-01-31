@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../viewModel/pokemon_page_model.dart';
+import '../service/pokemon_service.dart';
 
 class PokemonPage extends ConsumerWidget {
   const PokemonPage({super.key});

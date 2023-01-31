@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'typePokemon.dart';
 
 part 'pokeType.g.dart';
