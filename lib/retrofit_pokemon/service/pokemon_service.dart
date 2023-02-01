@@ -13,7 +13,7 @@ final pokemonProvider = FutureProvider<dynamic>(
 
     final dio = customDio();
     final client = RestClient(dio);
-    // dio.options.headers["Demo-Header"] = "demo header"; //なくてもOKでした。
+    dio.options.headers["Demo-Header"] = "demo header"; //なくてもOKでした。
     final PokeType pokeType = await client.getNamesWithType(type);
     final List<TypePokemon>? typePokemons = pokeType.pokemon;
     print(typePokemons.toString());

@@ -8,9 +8,9 @@ class PokemonPage extends ConsumerWidget {
   const PokemonPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final AsyncValue asyncValue =
-    //     ref.watch(pokemonPageModelProvider.notifier).asyncPokemon;
-    final asyncValue = ref.watch(pokemonProvider);
+    final AsyncValue asyncValue =
+        ref.watch(pokemonPageModelProvider.notifier).asyncPokemon;
+    // final asyncValue = ref.watch(pokemonProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text("PokeApi"),
