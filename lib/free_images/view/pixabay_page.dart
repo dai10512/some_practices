@@ -5,8 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../model/pixabay_image.dart';
 import '../viewModel/pixabay_page_view_model.dart';
 
-
-
 class PixabayPage extends ConsumerWidget {
   PixabayPage({Key? key}) : super(key: key);
   final textController = TextEditingController(text: 'kabuki');
@@ -31,16 +29,15 @@ class PixabayPage extends ConsumerWidget {
         ),
       ),
       body: asyncImage.when(
-        error: (error, stackTrace) => const Text('error'),
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
-        ),
+        error: (_, stackTrace) => const Text('error'),
+        loading: () => const Center(child: CircularProgressIndicator()),
         data: (data) => _gridViewBuilder(data),
       ),
     );
   }
 
   Widget _gridViewBuilder(List data) {
+    
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

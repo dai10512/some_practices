@@ -2,13 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../service/pokemon_service.dart';
+import '../repository/pokemon_repository.dart';
 
 part 'pokemon_page_model.freezed.dart';
 part 'pokemon_page_model.g.dart';
 
 // final pokemonPageModelProvider =
-//     AsyncNotifierProvider<PokemonPageModel, PokemonPageModelState>(
+//     NotifierProvider<PokemonPageModel, PokemonPageModelState>(
 //         () => PokemonPageModel());
 
 @freezed
@@ -20,27 +20,15 @@ class PokemonPageModelState with _$PokemonPageModelState {
   }) = _PokemonPageModelState;
 }
 
-// class PokemonPageModel extends AsyncNotifier<PokemonPageModelState> {
+// class PokemonPageModel extends Notifier<PokemonPageModelState> {
 //   @override
-//   build() => PokemonPageModelState(ref);
-//   AsyncValue get asyncPokemon => ref.watch(pokemonProvider);
-// }
+//   build() async {
+//     return PokemonPageModelState(ref);
+//   }
+// }  
 
 @riverpod
 class PokemonPageModel extends _$PokemonPageModel {
   @override
-  build() {
-    ref.watch(pokemonProvider);
-    return (PokemonPageModelState(ref)) {
-      init() {}
-    };
-  }
-
-  @override
-  init() {
-    print('aa');
-    state = 
-  }
-
-  AsyncValue get asyncPokemon => ref.watch(pokemonProvider);
+  build() => PokemonPageModelState(ref);
 }

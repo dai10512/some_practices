@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PokemonPageModelState {
   Ref<Object?> get ref => throw _privateConstructorUsedError;
-  dynamic get count => throw _privateConstructorUsedError;
+  int get count => throw _privateConstructorUsedError;
   AsyncValue<dynamic> get pokemonState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,8 +31,7 @@ abstract class $PokemonPageModelStateCopyWith<$Res> {
           $Res Function(PokemonPageModelState) then) =
       _$PokemonPageModelStateCopyWithImpl<$Res, PokemonPageModelState>;
   @useResult
-  $Res call(
-      {Ref<Object?> ref, dynamic count, AsyncValue<dynamic> pokemonState});
+  $Res call({Ref<Object?> ref, int count, AsyncValue<dynamic> pokemonState});
 }
 
 /// @nodoc
@@ -50,7 +49,7 @@ class _$PokemonPageModelStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? ref = null,
-    Object? count = freezed,
+    Object? count = null,
     Object? pokemonState = null,
   }) {
     return _then(_value.copyWith(
@@ -58,10 +57,10 @@ class _$PokemonPageModelStateCopyWithImpl<$Res,
           ? _value.ref
           : ref // ignore: cast_nullable_to_non_nullable
               as Ref<Object?>,
-      count: freezed == count
+      count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int,
       pokemonState: null == pokemonState
           ? _value.pokemonState
           : pokemonState // ignore: cast_nullable_to_non_nullable
@@ -78,8 +77,7 @@ abstract class _$$_PokemonPageModelStateCopyWith<$Res>
       __$$_PokemonPageModelStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {Ref<Object?> ref, dynamic count, AsyncValue<dynamic> pokemonState});
+  $Res call({Ref<Object?> ref, int count, AsyncValue<dynamic> pokemonState});
 }
 
 /// @nodoc
@@ -94,7 +92,7 @@ class __$$_PokemonPageModelStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? ref = null,
-    Object? count = freezed,
+    Object? count = null,
     Object? pokemonState = null,
   }) {
     return _then(_$_PokemonPageModelState(
@@ -102,7 +100,10 @@ class __$$_PokemonPageModelStateCopyWithImpl<$Res>
           ? _value.ref
           : ref // ignore: cast_nullable_to_non_nullable
               as Ref<Object?>,
-      count: freezed == count ? _value.count! : count,
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
       pokemonState: null == pokemonState
           ? _value.pokemonState
           : pokemonState // ignore: cast_nullable_to_non_nullable
@@ -121,7 +122,7 @@ class _$_PokemonPageModelState implements _PokemonPageModelState {
   final Ref<Object?> ref;
   @override
   @JsonKey()
-  final dynamic count;
+  final int count;
   @override
   @JsonKey()
   final AsyncValue<dynamic> pokemonState;
@@ -137,14 +138,13 @@ class _$_PokemonPageModelState implements _PokemonPageModelState {
         (other.runtimeType == runtimeType &&
             other is _$_PokemonPageModelState &&
             (identical(other.ref, ref) || other.ref == ref) &&
-            const DeepCollectionEquality().equals(other.count, count) &&
+            (identical(other.count, count) || other.count == count) &&
             (identical(other.pokemonState, pokemonState) ||
                 other.pokemonState == pokemonState));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, ref,
-      const DeepCollectionEquality().hash(count), pokemonState);
+  int get hashCode => Object.hash(runtimeType, ref, count, pokemonState);
 
   @JsonKey(ignore: true)
   @override
@@ -156,13 +156,13 @@ class _$_PokemonPageModelState implements _PokemonPageModelState {
 
 abstract class _PokemonPageModelState implements PokemonPageModelState {
   factory _PokemonPageModelState(final Ref<Object?> ref,
-      {final dynamic count,
+      {final int count,
       final AsyncValue<dynamic> pokemonState}) = _$_PokemonPageModelState;
 
   @override
   Ref<Object?> get ref;
   @override
-  dynamic get count;
+  int get count;
   @override
   AsyncValue<dynamic> get pokemonState;
   @override

@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:search_free_image/retrofit_pokemon/viewModel/pokemon_page_model.dart';
 
-import '../service/pokemon_service.dart';
+import '../repository/pokemon_repository.dart';
 
 class PokemonPage extends ConsumerWidget {
-  const PokemonPage({super.key});
+  PokemonPage({super.key});
+  final textController = TextEditingController(text: 'ground');
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue asyncValue =
-        ref.watch(pokemonPageModelProvider.notifier).asyncPokemon;
-    // final asyncValue = ref.watch(pokemonProvider);
+  Widget build(context, ref) {
+    final asyncPokemon = ref.watch(pokemonFetchProvider(textController.text));
+    ref.watch(pokemonRefreshProvider);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("PokeApi"),
+        elevation: 0,
+        title: TextFormField(
+          decoration: const InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
+          ),
+          controller: textController,
+          onFieldSubmitted: (_) async {
+            ref.invalidate(pokemonRefreshProvider);
+          },
+        ),
       ),
-      body: asyncValue.when(
+      body: asyncPokemon.when(
         error: (_, stackTrace) => const Text('error'),
         loading: () => const Text('loading..'),
         data: (typePokemons) => ListView.builder(
