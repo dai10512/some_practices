@@ -32,7 +32,10 @@ class PokemonPage extends ConsumerWidget {
         data: (typePokemons) => ListView.builder(
           itemCount: typePokemons.length,
           itemBuilder: (context, index) {
-            return ListTile(title: Text(typePokemons[index].pokemon.name));
+            final typePokemon = typePokemons[index];
+            return ListTile(
+              title: Text(typePokemon.pokemon.name),
+            );
           },
         ),
       ),
