@@ -13,7 +13,7 @@ class _RestClient implements RestClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://pokeapi.com/api/v2';
+    baseUrl ??= 'https://pokeapi.co/api/v2';
   }
 
   final Dio _dio;

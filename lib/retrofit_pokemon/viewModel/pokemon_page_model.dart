@@ -15,7 +15,8 @@ part 'pokemon_page_model.g.dart';
 class PokemonPageModelState with _$PokemonPageModelState {
   factory PokemonPageModelState(
     Ref<Object?> ref, {
-    @Default(-1) count,
+    @Default(-1) int count,
+    @Default(AsyncValue.loading()) AsyncValue pokemonState,
   }) = _PokemonPageModelState;
 }
 
@@ -28,6 +29,18 @@ class PokemonPageModelState with _$PokemonPageModelState {
 @riverpod
 class PokemonPageModel extends _$PokemonPageModel {
   @override
-  build() => PokemonPageModelState(ref);
+  build() {
+    ref.watch(pokemonProvider);
+    return (PokemonPageModelState(ref)) {
+      init() {}
+    };
+  }
+
+  @override
+  init() {
+    print('aa');
+    state = 
+  }
+
   AsyncValue get asyncPokemon => ref.watch(pokemonProvider);
 }

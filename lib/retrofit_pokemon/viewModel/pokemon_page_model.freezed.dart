@@ -16,8 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PokemonPageModelState {
-  Ref<Object?> get ref => throw _privateConstructorUsedError; // {
+  Ref<Object?> get ref => throw _privateConstructorUsedError;
   dynamic get count => throw _privateConstructorUsedError;
+  AsyncValue<dynamic> get pokemonState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PokemonPageModelStateCopyWith<PokemonPageModelState> get copyWith =>
@@ -30,7 +31,8 @@ abstract class $PokemonPageModelStateCopyWith<$Res> {
           $Res Function(PokemonPageModelState) then) =
       _$PokemonPageModelStateCopyWithImpl<$Res, PokemonPageModelState>;
   @useResult
-  $Res call({Ref<Object?> ref, dynamic count});
+  $Res call(
+      {Ref<Object?> ref, dynamic count, AsyncValue<dynamic> pokemonState});
 }
 
 /// @nodoc
@@ -49,6 +51,7 @@ class _$PokemonPageModelStateCopyWithImpl<$Res,
   $Res call({
     Object? ref = null,
     Object? count = freezed,
+    Object? pokemonState = null,
   }) {
     return _then(_value.copyWith(
       ref: null == ref
@@ -59,6 +62,10 @@ class _$PokemonPageModelStateCopyWithImpl<$Res,
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      pokemonState: null == pokemonState
+          ? _value.pokemonState
+          : pokemonState // ignore: cast_nullable_to_non_nullable
+              as AsyncValue<dynamic>,
     ) as $Val);
   }
 }
@@ -71,7 +78,8 @@ abstract class _$$_PokemonPageModelStateCopyWith<$Res>
       __$$_PokemonPageModelStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Ref<Object?> ref, dynamic count});
+  $Res call(
+      {Ref<Object?> ref, dynamic count, AsyncValue<dynamic> pokemonState});
 }
 
 /// @nodoc
@@ -87,6 +95,7 @@ class __$$_PokemonPageModelStateCopyWithImpl<$Res>
   $Res call({
     Object? ref = null,
     Object? count = freezed,
+    Object? pokemonState = null,
   }) {
     return _then(_$_PokemonPageModelState(
       null == ref
@@ -94,6 +103,10 @@ class __$$_PokemonPageModelStateCopyWithImpl<$Res>
           : ref // ignore: cast_nullable_to_non_nullable
               as Ref<Object?>,
       count: freezed == count ? _value.count! : count,
+      pokemonState: null == pokemonState
+          ? _value.pokemonState
+          : pokemonState // ignore: cast_nullable_to_non_nullable
+              as AsyncValue<dynamic>,
     ));
   }
 }
@@ -101,18 +114,21 @@ class __$$_PokemonPageModelStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PokemonPageModelState implements _PokemonPageModelState {
-  _$_PokemonPageModelState(this.ref, {this.count = -1});
+  _$_PokemonPageModelState(this.ref,
+      {this.count = -1, this.pokemonState = const AsyncValue.loading()});
 
   @override
   final Ref<Object?> ref;
-// {
   @override
   @JsonKey()
   final dynamic count;
+  @override
+  @JsonKey()
+  final AsyncValue<dynamic> pokemonState;
 
   @override
   String toString() {
-    return 'PokemonPageModelState(ref: $ref, count: $count)';
+    return 'PokemonPageModelState(ref: $ref, count: $count, pokemonState: $pokemonState)';
   }
 
   @override
@@ -121,12 +137,14 @@ class _$_PokemonPageModelState implements _PokemonPageModelState {
         (other.runtimeType == runtimeType &&
             other is _$_PokemonPageModelState &&
             (identical(other.ref, ref) || other.ref == ref) &&
-            const DeepCollectionEquality().equals(other.count, count));
+            const DeepCollectionEquality().equals(other.count, count) &&
+            (identical(other.pokemonState, pokemonState) ||
+                other.pokemonState == pokemonState));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, ref, const DeepCollectionEquality().hash(count));
+  int get hashCode => Object.hash(runtimeType, ref,
+      const DeepCollectionEquality().hash(count), pokemonState);
 
   @JsonKey(ignore: true)
   @override
@@ -138,12 +156,15 @@ class _$_PokemonPageModelState implements _PokemonPageModelState {
 
 abstract class _PokemonPageModelState implements PokemonPageModelState {
   factory _PokemonPageModelState(final Ref<Object?> ref,
-      {final dynamic count}) = _$_PokemonPageModelState;
+      {final dynamic count,
+      final AsyncValue<dynamic> pokemonState}) = _$_PokemonPageModelState;
 
   @override
   Ref<Object?> get ref;
-  @override // {
+  @override
   dynamic get count;
+  @override
+  AsyncValue<dynamic> get pokemonState;
   @override
   @JsonKey(ignore: true)
   _$$_PokemonPageModelStateCopyWith<_$_PokemonPageModelState> get copyWith =>
