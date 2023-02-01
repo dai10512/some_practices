@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'client.dart';
+part of 'pokemon_api_client.dart';
 
 // **************************************************************************
 // RetrofitGenerator

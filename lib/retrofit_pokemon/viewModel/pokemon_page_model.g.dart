@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-String _$PokemonPageModelHash() => r'd730e27c5488be900301d1a00452c2e137d5bd26';
+String _$PokemonPageModelHash() => r'95683e7c5148f8b24dc99be2ba231a48f3f4ec1b';
 
 /// See also [PokemonPageModel].
 final pokemonPageModelProvider =
