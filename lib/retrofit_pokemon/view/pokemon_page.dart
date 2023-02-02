@@ -9,9 +9,9 @@ class PokemonPage extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final asyncPokemon = ref.watch(pokemonFetchProvider(textController.text));
+    final asyncPokemon =
+        ref.watch(pokemonGetNamesWithTypeProvider(textController.text));
     ref.watch(pokemonRefreshProvider);
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
