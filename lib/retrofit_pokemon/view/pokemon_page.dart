@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:search_free_image/retrofit_pokemon/viewModel/pokemon_page_model.dart';
 
 import '../repository/pokemon_repository.dart';
 
 class PokemonPage extends ConsumerWidget {
-  PokemonPage({super.key});
-  final textController = TextEditingController(text: 'ground');
+  const PokemonPage({super.key});
 
   @override
   Widget build(context, ref) {
+    final pageModelNotifier = ref.read(pokemonPageModelProvider.notifier);
+    final textController = pageModelNotifier.textController;
     final asyncPokemon =
         ref.watch(pokemonGetNamesWithTypeProvider(textController.text));
     ref.watch(pokemonRefreshProvider);
@@ -21,8 +23,8 @@ class PokemonPage extends ConsumerWidget {
             filled: true,
           ),
           controller: textController,
-          onFieldSubmitted: (_) async {
-            ref.invalidate(pokemonRefreshProvider);
+          onFieldSubmitted: (_) {
+            pageModelNotifier.onFieldSubmitted();
           },
         ),
       ),
