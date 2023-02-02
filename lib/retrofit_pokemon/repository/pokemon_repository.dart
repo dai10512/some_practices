@@ -7,13 +7,6 @@ import '../client/pokemon_api_client.dart';
 final pokemonRefreshProvider =
     FutureProvider((ref) => pokemonGetNamesWithTypeProvider);
 
-// @riverpod
-// pokemonRefresh(Ref ref) => pokemonGetNamesWithTypeProvider;
-
-// @riverpod
-// pokemonGetNamesWithType(Ref ref, String type) =>
-    // FutureProvider.family<List, String>(
-    //     (ref, type) async => PokemonRepository().getNamesWithType(type));
 final pokemonGetNamesWithTypeProvider = FutureProvider.family<List, String>(
     (ref, type) async => PokemonRepository().getNamesWithType(type));
 
