@@ -11,8 +11,8 @@ class PokemonPage extends ConsumerWidget {
   Widget build(context, ref) {
     final pageModelNotifier = ref.read(pokemonPageModelProvider.notifier);
     final textController = pageModelNotifier.textController;
-    final asyncPokemon =
-        ref.watch(pokemonGetNamesWithTypeProvider(textController.text));
+    final pokemonProvider = pageModelNotifier.getProvider();
+    final asyncPokemon = ref.watch(pokemonProvider);
     ref.watch(pokemonRefreshProvider);
     return Scaffold(
       appBar: AppBar(
@@ -43,4 +43,5 @@ class PokemonPage extends ConsumerWidget {
       ),
     );
   }
+  
 }

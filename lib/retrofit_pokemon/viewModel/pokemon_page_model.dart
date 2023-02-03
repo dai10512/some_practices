@@ -14,16 +14,27 @@ final pokemonPageModelProvider =
 class PokemonPageModelState with _$PokemonPageModelState {
   factory PokemonPageModelState(
     Ref<Object?> ref, {
-    @Default(-1) int count,
-    @Default(AsyncValue.loading()) AsyncValue pokemonState,
+    @Default(1) int count,
+    // @Default(AsyncLoading()) AsyncValue pokemonState,
   }) = _PokemonPageModelState;
 }
 
 class PokemonPageModel extends Notifier<PokemonPageModelState> {
   @override
-  build() async => PokemonPageModelState(ref);
+  build() {
+    // init();
+    return PokemonPageModelState(ref);
+  }
 
   final textController = TextEditingController(text: 'ground');
+
+  // init() {
+  //   // fetch2();
+  // }
+
+  FutureProvider<List> getProvider() {
+    return pokemonGetNamesWithTypeProvider(textController.text);
+  }
 
   void onFieldSubmitted() {
     ref.invalidate(pokemonRefreshProvider);
