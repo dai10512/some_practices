@@ -116,7 +116,7 @@ class __$$_PokemonPageModelStateCopyWithImpl<$Res>
 
 class _$_PokemonPageModelState implements _PokemonPageModelState {
   _$_PokemonPageModelState(this.ref,
-      {this.count = 1, this.pokemonState = const AsyncLoading()});
+      {this.count = 1, this.pokemonState = const AsyncValue.loading()});
 
   @override
   final Ref<Object?> ref;
