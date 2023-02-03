@@ -29,8 +29,8 @@ class PokemonPageModel extends Notifier<PokemonPageModelState> {
     final aa = ref.watch(pokemonGetNamesWithTypeProvider(textController.text));
     print(state.count.toString());
     print(state.toString());
-    state = state.copyWith(count: 1);
-    state = state.copyWith(pokemonState: AsyncValue.data(aa));
+    // state = state.copyWith(count: 1);
+    // state = state.copyWith(pokemonState: AsyncValue.data(aa));
   }
 
   FutureProvider<List> getProvider() {
