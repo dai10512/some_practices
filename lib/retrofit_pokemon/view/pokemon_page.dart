@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:search_free_image/retrofit_pokemon/model/typePokemon.dart';
 import 'package:search_free_image/retrofit_pokemon/viewModel/pokemon_page_model.dart';
 
 import '../repository/pokemon_repository.dart';
 
-class PokemonPage extends ConsumerWidget {
+class PokemonPage extends ConsumerStatefulWidget {
   const PokemonPage({super.key});
 
   @override
-  Widget build(context, ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _PokemonPageState();
+}
+
+class _PokemonPageState extends ConsumerState<PokemonPage> {
+  @override
+  void initState() {
+    super.initState();
+    //描画後にコールバックする
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(pokemonPageModelProvider.notifier).fetch();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     //確定//
     final pageModelNotifier = ref.read(pokemonPageModelProvider.notifier);
     final textController = pageModelNotifier.textController;
     //確定//
 
-    final pokemonProvider = pageModelNotifier.fetch();
-    // final asyncPokemon = ref.watch(pokemonProvider);
-
     final asyncPokemon = ref.watch(pokemonPageModelProvider).pokemonState;
-    
+    print(asyncPokemon.asData);
     ref.watch(pokemonRefreshProvider);
     return Scaffold(
       appBar: AppBar(
@@ -39,6 +51,7 @@ class PokemonPage extends ConsumerWidget {
         loading: () => const Text('loading..'),
         data: (typePokemons) => ListView.builder(
           itemCount: typePokemons.length,
+          // itemCount: 1,
           itemBuilder: (context, index) {
             final typePokemon = typePokemons[index];
             return ListTile(
@@ -49,5 +62,4 @@ class PokemonPage extends ConsumerWidget {
       ),
     );
   }
-  
 }
