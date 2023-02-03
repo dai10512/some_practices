@@ -6,7 +6,9 @@ import '../repository/pokemon_repository.dart';
 
 part 'pokemon_page_model.freezed.dart';
 
-final pokemonPageModelProvider = NotifierProvider(() => PokemonPageModel());
+final pokemonPageModelProvider =
+    NotifierProvider<PokemonPageModel, PokemonPageModelState>(
+        () => PokemonPageModel());
 
 @freezed
 class PokemonPageModelState with _$PokemonPageModelState {
@@ -24,15 +26,11 @@ class PokemonPageModel extends Notifier<PokemonPageModelState> {
   final textController = TextEditingController(text: 'ground');
 
   void fetch() {
-    try {
-      final asyncPokemon =
-          ref.watch(pokemonGetNamesWithTypeProvider(textController.text));
-
-      state = state.copyWith(pokemonState: const AsyncValue.loading());
-    } catch (error, stackTrace) {
-      state = state =
-          state.copyWith(pokemonState: AsyncValue.error(error, stackTrace));
-    }
+    final aa = ref.watch(pokemonGetNamesWithTypeProvider(textController.text));
+    print(state.count.toString());
+    print(state.toString());
+    // state = state.copyWith(count: 1);
+    // state = state.copyWith(pokemonState: AsyncValue.data(aa));
   }
 
   FutureProvider<List> getProvider() {
