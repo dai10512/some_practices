@@ -4,21 +4,28 @@ import 'package:search_free_image/retrofit_pokemon/viewModel/pokemon_page_model.
 
 import '../repository/pokemon_repository.dart';
 
-class PokemonPage extends ConsumerWidget {
+class PokemonPage extends ConsumerStatefulWidget {
   const PokemonPage({super.key});
 
   @override
-  Widget build(context, ref) {
-    //確定//
+  ConsumerState<ConsumerStatefulWidget> createState() => _PokemonPageState();
+}
+
+class _PokemonPageState extends ConsumerState<PokemonPage> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(pokemonPageModelProvider.notifier).fetch();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final pageModelNotifier = ref.read(pokemonPageModelProvider.notifier);
     final textController = pageModelNotifier.textController;
-    //確定//
-
-    final pokemonProvider = pageModelNotifier.fetch();
-    // final asyncPokemon = ref.watch(pokemonProvider);
-
     final asyncPokemon = ref.watch(pokemonPageModelProvider).pokemonState;
-    
+
     ref.watch(pokemonRefreshProvider);
     return Scaffold(
       appBar: AppBar(
@@ -34,20 +41,26 @@ class PokemonPage extends ConsumerWidget {
           },
         ),
       ),
-      body: asyncPokemon.when(
-        error: (_, stackTrace) => const Text('error'),
-        loading: () => const Text('loading..'),
-        data: (typePokemons) => ListView.builder(
-          itemCount: typePokemons.length,
-          itemBuilder: (context, index) {
-            final typePokemon = typePokemons[index];
-            return ListTile(
-              title: Text(typePokemon.pokemon.name),
-            );
-          },
-        ),
+      body: Consumer(builder: (context, ref, _) {
+        return asyncPokemon.when(
+          error: (_, stackTrace) => const Text('error'),
+          loading: () => const Text('loading..'),
+          data: (typePokemons) => ListView.builder(
+            itemCount: typePokemons.length,
+            itemBuilder: (context, index) {
+              final typePokemon = typePokemons[index];
+              return ListTile(
+                title: Text(typePokemon.pokemon.name),
+              );
+            },
+          ),
+        );
+      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          pageModelNotifier.onFieldSubmitted();
+        },
       ),
     );
   }
-  
 }
