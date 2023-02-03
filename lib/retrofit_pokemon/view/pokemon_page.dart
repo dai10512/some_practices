@@ -9,10 +9,16 @@ class PokemonPage extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
+    //確定//
     final pageModelNotifier = ref.read(pokemonPageModelProvider.notifier);
     final textController = pageModelNotifier.textController;
-    final pokemonProvider = pageModelNotifier.getProvider();
-    final asyncPokemon = ref.watch(pokemonProvider);
+    //確定//
+
+    final pokemonProvider = pageModelNotifier.fetch();
+    // final asyncPokemon = ref.watch(pokemonProvider);
+
+    final asyncPokemon = ref.watch(pokemonPageModelProvider).pokemonState;
+    
     ref.watch(pokemonRefreshProvider);
     return Scaffold(
       appBar: AppBar(

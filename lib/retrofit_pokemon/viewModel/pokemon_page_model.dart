@@ -21,18 +21,17 @@ class PokemonPageModelState with _$PokemonPageModelState {
 
 class PokemonPageModel extends Notifier<PokemonPageModelState> {
   @override
-  build() {
-    init();
-    return PokemonPageModelState(ref);
-  }
+  build() => PokemonPageModelState(ref);
 
   final textController = TextEditingController(text: 'ground');
 
-  init() {
-    fetch();
+  void fetch() {
+    final aa = ref.watch(pokemonGetNamesWithTypeProvider(textController.text));
+    print(state.count.toString());
+    print(state.toString());
+    state = state.copyWith(count: 1);
+    state = state.copyWith(pokemonState: AsyncValue.data(aa));
   }
-
-  fetch() {}
 
   FutureProvider<List> getProvider() {
     return pokemonGetNamesWithTypeProvider(textController.text);
