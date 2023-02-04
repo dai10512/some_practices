@@ -34,9 +34,7 @@ class _PokemonPageState extends ConsumerState<PokemonPage> {
             filled: true,
           ),
           controller: textController,
-          onFieldSubmitted: (_) {
-            pageModelNotifier.fetch();
-          },
+          onFieldSubmitted: (_) => pageModelNotifier.fetch(),
         ),
       ),
       body: asyncPokemon.when(

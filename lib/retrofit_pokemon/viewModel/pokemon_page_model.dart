@@ -15,37 +15,12 @@ class PokemonPageModelState with _$PokemonPageModelState {
   }) = _PokemonPageModelState;
 }
 
-// class PokemonPageModel extends Notifier<PokemonPageModelState> {
-//   @override
-//   build() => PokemonPageModelState(ref);
 
-//   final textController = TextEditingController(text: 'ground');
-
-//   void fetch() {
-//     // try {
-//     //   final data =
-//     //       ref.watch(pokemonGetNamesWithTypeProvider(textController.text));
-//     //   state = state.copyWith(pokemonState: AsyncData(data));
-//     // } catch (error, stackTrace) {
-//     //   state = state.copyWith(pokemonState: AsyncValue.error(error, stackTrace));
-//     // }
-//   }
-
-//   void onFieldSubmitted() {
-//     ref.invalidateSelf();
-
-//     ref.invalidate(pokemonsGetNamesWithTypeProvider);
-//   }
-// }
-
-// 型必須
+// 型必須なので注意
 final pokemonPageModelProvider =
     NotifierProvider<PokemonPageModel, PokemonPageModelState>(
         () => PokemonPageModel());
 
-// class PokemonPageModel extends Notifier<AsyncValue<List>> {
-//   @override
-//   build() => const AsyncValue.loading();
 
 class PokemonPageModel extends Notifier<PokemonPageModelState> {
   @override
@@ -54,11 +29,10 @@ class PokemonPageModel extends Notifier<PokemonPageModelState> {
   final textController = TextEditingController(text: 'ground');
   String get text => textController.text;
 
+  // 2回目のfetchはinvalidateを使うべきと思われる。
   void fetch() async {
     state = state.copyWith(pokemonState: const AsyncValue.loading());
     final data = ref.watch(pokemonsGetNamesWithTypeProvider(text).future);
-        // state = state.copyWith(pokemonState :await AsyncValue.guard(() async => data));
-
     final pokemonState = await AsyncValue.guard(() async => data);
     state = state.copyWith(pokemonState: pokemonState);
   }
