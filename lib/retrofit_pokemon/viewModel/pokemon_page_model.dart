@@ -15,12 +15,10 @@ class PokemonPageModelState with _$PokemonPageModelState {
   }) = _PokemonPageModelState;
 }
 
-
 // 型必須なので注意
 final pokemonPageModelProvider =
     NotifierProvider<PokemonPageModel, PokemonPageModelState>(
         () => PokemonPageModel());
-
 
 class PokemonPageModel extends Notifier<PokemonPageModelState> {
   @override
