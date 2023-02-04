@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../repository/pokemon_repository.dart';
 
-// part 'pokemon_page_model.freezed.dart';
+part 'pokemon_page_model.freezed.dart';
 
-// @freezed
-// class PokemonPageModelState with _$PokemonPageModelState {
-//   factory PokemonPageModelState(
-//     Ref<Object?> ref, {
-//     @Default(1) int count,
-//     @Default(AsyncValue.loading()) AsyncValue pokemonState,
-//   }) = _PokemonPageModelState;
-// }
+@freezed
+class PokemonPageModelState with _$PokemonPageModelState {
+  factory PokemonPageModelState(
+    Ref<Object?> ref, {
+    @Default(1) int count,
+    @Default(AsyncValue.loading()) AsyncValue pokemonState,
+  }) = _PokemonPageModelState;
+}
 
 // class PokemonPageModel extends Notifier<PokemonPageModelState> {
 //   @override
@@ -40,21 +40,26 @@ import '../repository/pokemon_repository.dart';
 
 // 型必須
 final pokemonPageModelProvider =
-    NotifierProvider<PokemonPageModel, AsyncValue<List>>(
+    NotifierProvider<PokemonPageModel, PokemonPageModelState>(
         () => PokemonPageModel());
 
+// class PokemonPageModel extends Notifier<AsyncValue<List>> {
+//   @override
+//   build() => const AsyncValue.loading();
 
-class PokemonPageModel extends Notifier<AsyncValue<List>> {
+class PokemonPageModel extends Notifier<PokemonPageModelState> {
   @override
-  build() => const AsyncValue.loading();
+  build() => PokemonPageModelState(ref);
 
   final textController = TextEditingController(text: 'ground');
+  String get text => textController.text;
 
   void fetch() async {
-    state = const AsyncValue.loading();
-    final data =
-        ref.watch(pokemonsGetNamesWithTypeProvider(textController.text).future);
-    state = await AsyncValue.guard(() async => data);
-  }
+    state = state.copyWith(pokemonState: const AsyncValue.loading());
+    final data = ref.watch(pokemonsGetNamesWithTypeProvider(text).future);
+        // state = state.copyWith(pokemonState :await AsyncValue.guard(() async => data));
 
+    final pokemonState = await AsyncValue.guard(() async => data);
+    state = state.copyWith(pokemonState: pokemonState);
+  }
 }
