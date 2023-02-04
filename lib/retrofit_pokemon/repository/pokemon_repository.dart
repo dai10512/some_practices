@@ -1,18 +1,30 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'dart:io';
 
-import '../client/dio.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../client/pokemon_api_client.dart';
 
-final pokemonRefreshProvider =
-    FutureProvider((ref) => pokemonGetNamesWithTypeProvider);
-
-final pokemonGetNamesWithTypeProvider = FutureProvider.family<List, String>(
-    (ref, type) async => PokemonRepository().getNamesWithType(type));
+final repositoryProvider = Provider((ref) => PokemonRepository());
+final pokemonsGetNamesWithTypeProvider = FutureProvider.family(
+  (Ref ref, String type) async {
+    return ref.read(repositoryProvider).getNamesWithType(type);
+  },
+);
 
 class PokemonRepository {
+  var dio = Dio(
+    BaseOptions(
+      connectTimeout: 5000,
+      receiveTimeout: 5000,
+      headers: {
+        HttpHeaders.userAgentHeader: 'dio',
+        'common-header': 'xx',
+      },
+    ),
+  );
+
   Future<List> getNamesWithType(String type) async {
-    final dio = customDio();
     final client = RestClient(dio);
     return await client
         .getNamesWithType(type)
@@ -20,7 +32,6 @@ class PokemonRepository {
   }
 
   Future<List> getNamesWithType2(String type) async {
-    final dio = customDio();
     final client = RestClient(dio);
     return await client
         .getNamesWithType(type)

@@ -29,9 +29,11 @@ class _PokemonPageState extends ConsumerState<PokemonPage> {
     final textController = pageModelNotifier.textController;
     //確定//
 
-    final asyncPokemon = ref.watch(pokemonPageModelProvider).pokemonState;
-    print(asyncPokemon.asData);
-    ref.watch(pokemonRefreshProvider);
+    // final asyncPokemon = ref.watch(pokemonPageModelProvider).pokemonState;
+    // print(asyncPokemon.asData);
+    final asyncPokemon = ref.watch(pokemonsGetNamesWithTypeProvider(textController.text));
+    ref.watch(repositoryProvider);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

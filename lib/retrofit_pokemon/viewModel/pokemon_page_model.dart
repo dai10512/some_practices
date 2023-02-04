@@ -26,20 +26,18 @@ class PokemonPageModel extends Notifier<PokemonPageModelState> {
   final textController = TextEditingController(text: 'ground');
 
   void fetch() {
-    try {
-      final aa =
-          ref.watch(pokemonGetNamesWithTypeProvider(textController.text));
-      state = state.copyWith(pokemonState: AsyncData(aa));
-    } catch (error, stackTrace) {
-      state = state.copyWith(pokemonState: AsyncValue.error(error, stackTrace));
-    }
-  }
-
-  FutureProvider<List> getProvider() {
-    return pokemonGetNamesWithTypeProvider(textController.text);
+    // try {
+    //   final data =
+    //       ref.watch(pokemonGetNamesWithTypeProvider(textController.text));
+    //   state = state.copyWith(pokemonState: AsyncData(data));
+    // } catch (error, stackTrace) {
+    //   state = state.copyWith(pokemonState: AsyncValue.error(error, stackTrace));
+    // }
   }
 
   void onFieldSubmitted() {
-    ref.invalidate(pokemonRefreshProvider);
+    ref.invalidateSelf();
+
+    ref.invalidate(pokemonsGetNamesWithTypeProvider);
   }
 }
