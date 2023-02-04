@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:search_free_image/retrofit_pokemon/viewModel/pokemon_page_model.dart';
 
-
-
 class PokemonPage extends ConsumerStatefulWidget {
   const PokemonPage({super.key});
 
@@ -42,8 +40,8 @@ class _PokemonPageState extends ConsumerState<PokemonPage> {
         ),
       ),
       body: asyncPokemon.when(
-        error: (_, stackTrace) => const Text('error'),
-        loading: () => const Text('loading..'),
+        error: (_, stackTrace) => const Center(child: Text('error')),
+        loading: () => const Center(child: CircularProgressIndicator()),
         data: (typePokemons) => ListView.builder(
           itemCount: typePokemons.length,
           itemBuilder: (context, index) {

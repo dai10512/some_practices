@@ -1,14 +1,17 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final dioProvider = Provider((ref) => customDio());
-
-Dio customDio() {
-  var options = BaseOptions(
-    // baseUrl: 'https://pixabay.com/api',
-    connectTimeout: 10000,
-    receiveTimeout: 10000,
-    headers: {"Demo-Header": "demo header"},
-  );
-  return Dio(options);
-}
+final dioProvider = Provider(
+  (ref) => Dio(
+    BaseOptions(
+      connectTimeout: 5000,
+      receiveTimeout: 5000,
+      headers: {
+        HttpHeaders.userAgentHeader: 'dio',
+        'common-header': 'xx',
+      },
+    ),
+  ),
+);
