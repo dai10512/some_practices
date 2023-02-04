@@ -11,7 +11,6 @@ final FutureProviderFamily<List, String> pokemonsGetNamesWithTypeProvider =
   (Ref ref, String type) async {
     final data = ref.read(repositoryProvider).getNamesWithType(type);
     return data;
-    // .then((value) => print(value));
   },
 );
 
