@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:search_free_image/retrofit_pokemon/model/typePokemon.dart';
 import 'package:search_free_image/retrofit_pokemon/viewModel/pokemon_page_model.dart';
-
-import '../repository/pokemon_repository.dart';
 
 class PokemonPage extends ConsumerStatefulWidget {
   const PokemonPage({super.key});
@@ -29,10 +26,7 @@ class _PokemonPageState extends ConsumerState<PokemonPage> {
     final textController = pageModelNotifier.textController;
     //確定//
 
-    // final asyncPokemon = ref.watch(pokemonPageModelProvider).pokemonState;
-    // print(asyncPokemon.asData);
-    final asyncPokemon = ref.watch(pokemonsGetNamesWithTypeProvider(textController.text));
-    ref.watch(repositoryProvider);
+    final asyncPokemon = ref.watch(pokemonPageModelProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -44,7 +38,7 @@ class _PokemonPageState extends ConsumerState<PokemonPage> {
           ),
           controller: textController,
           onFieldSubmitted: (_) {
-            pageModelNotifier.onFieldSubmitted();
+            pageModelNotifier.fetch();
           },
         ),
       ),

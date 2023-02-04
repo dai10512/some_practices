@@ -6,9 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../client/pokemon_api_client.dart';
 
 final repositoryProvider = Provider((ref) => PokemonRepository());
-final pokemonsGetNamesWithTypeProvider = FutureProvider.family(
+final FutureProviderFamily<List, String> pokemonsGetNamesWithTypeProvider =
+    FutureProvider.family(
   (Ref ref, String type) async {
-    return ref.read(repositoryProvider).getNamesWithType(type);
+    final data = ref.read(repositoryProvider).getNamesWithType(type);
+    return data;
+    // .then((value) => print(value));
   },
 );
 
