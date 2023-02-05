@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:search_free_image/get_text/get_text_page.dart';
 
 import 'pixabay_free_image/view/pixabay_page.dart';
 import 'pokemon/view/pokemon_page.dart';
-import 'riverpod_practice/pokemon_page.dart';
 
 class DebugPage extends StatelessWidget {
   const DebugPage({super.key});
@@ -29,12 +29,11 @@ class DebugPage extends StatelessWidget {
                     'for architecture and riverpod v2',
                 page: PokemonPage(),
               ),
-                            const CommonSpace(),
-
+              const CommonSpace(),
               const NavigationButton(
-                label: 'riverpod v2 practice page\n'
+                label: 'get text page\n'
                     'for riverpod v2',
-                page: PokemonPage2(),
+                page: GetTextPage(),
               ),
             ],
           ),
@@ -43,8 +42,6 @@ class DebugPage extends StatelessWidget {
     );
   }
 }
-
-
 
 class CommonSpace extends StatelessWidget {
   const CommonSpace({

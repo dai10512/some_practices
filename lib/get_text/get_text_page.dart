@@ -14,20 +14,20 @@ class _GetTextPageState extends ConsumerState<GetTextPage> {
   @override
   void initState() {
     super.initState();
-    //stateは描画後にコールバックする
+
+    //stateは描画後にコールバックして更新する
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(pokemonPageModelProvider.notifier).fetch();
+      ref.read(getTextPageModelProvider.notifier).fetch();
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    final asyncValue = ref.watch(pokemonPageModelProvider).textState;
+  Widget build(context) {
+    final asyncValue = ref.watch(getTextPageModelProvider).textState;
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        title: const Text('aa'),
+        title: const Text('get text page'),
       ),
       body: asyncValue.when(
         error: (_, stackTrace) => const Center(child: Text('error')),
@@ -36,8 +36,9 @@ class _GetTextPageState extends ConsumerState<GetTextPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(pokemonPageModelProvider.notifier).fetch();
+          ref.read(getTextPageModelProvider.notifier).fetch();
         },
+        child: const Icon(Icons.refresh),
       ),
     );
   }

@@ -10,23 +10,24 @@ class GetTextPageModelState with _$GetTextPageModelState {
   factory GetTextPageModelState(
     Ref<Object?> ref, {
     @Default(AsyncValue.loading()) AsyncValue textState,
+    //他にもページに必要な変数を適宜追加する
   }) = _GetTextPageModelState;
 }
 
 // 型必須なので注意
-final pokemonPageModelProvider =
-    NotifierProvider<PokemonPageModel, GetTextPageModelState>(
-        () => PokemonPageModel());
+final getTextPageModelProvider =
+    NotifierProvider<GetTextPageModel, GetTextPageModelState>(
+        () => GetTextPageModel());
 
-class PokemonPageModel extends Notifier<GetTextPageModelState> {
+class GetTextPageModel extends Notifier<GetTextPageModelState> {
   @override
   build() => GetTextPageModelState(ref);
 
   // 2回目のfetchはinvalidateを使うべきと思われる。
   void fetch() async {
-    // state = state.copyWith(textState: const AsyncValue.loading());
+    state = state.copyWith(textState: const AsyncValue.loading());
     final data = ref.watch(repositoryProvider).getText();
     final textState = await AsyncValue.guard(() async => data);
-    // state = state.copyWith(textState: textState);
+    state = state.copyWith(textState: textState);
   }
 }
