@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
-import 'package:search_free_image/retrofit_pokemon/view/pokemon_page.dart';
 
-final logger = Logger();
+import 'pokemon/view/pokemon_page.dart';
+
 void main() {
   runApp(
     const ProviderScope(
@@ -21,5 +20,37 @@ class MyApp extends StatelessWidget {
       home: PokemonPage(),
       // home: PixabayPage(),
     );
+  }
+}
+
+class DebugPage extends StatelessWidget {
+  const DebugPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('デバッグページ'),
+        ),
+        body: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const PokemonPage()),
+                );
+              },
+              child: const Text('pixabay free image pages'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const PokemonPage()),
+                );
+              },
+              child: const Text('pokemon page'),
+            ),
+          ],
+        ));
   }
 }
