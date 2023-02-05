@@ -30,7 +30,7 @@ class PokemonPageModel extends Notifier<PokemonPageModelState> {
   // 2回目のfetchはinvalidateを使うべきと思われる。
   void fetch() async {
     state = state.copyWith(pokemonState: const AsyncValue.loading());
-    final data = ref.watch(pokemonsGetNamesWithTypeProvider(text).future);
+    final data = ref.watch(repositoryProvider).getNamesWithType(text);
     final pokemonState = await AsyncValue.guard(() async => data);
     state = state.copyWith(pokemonState: pokemonState);
   }

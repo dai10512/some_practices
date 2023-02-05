@@ -5,6 +5,11 @@ import 'get_text_repository.dart';
 
 part 'get_text_page_model.freezed.dart';
 
+// 型必須なので注意
+final getTextPageModelProvider =
+    NotifierProvider<GetTextPageModel, GetTextPageModelState>(
+        () => GetTextPageModel());
+
 @freezed
 class GetTextPageModelState with _$GetTextPageModelState {
   factory GetTextPageModelState(
@@ -14,11 +19,6 @@ class GetTextPageModelState with _$GetTextPageModelState {
   }) = _GetTextPageModelState;
 }
 
-// 型必須なので注意
-final getTextPageModelProvider =
-    NotifierProvider<GetTextPageModel, GetTextPageModelState>(
-        () => GetTextPageModel());
-
 class GetTextPageModel extends Notifier<GetTextPageModelState> {
   @override
   build() => GetTextPageModelState(ref);
@@ -26,8 +26,9 @@ class GetTextPageModel extends Notifier<GetTextPageModelState> {
   // 2回目のfetchはinvalidateを使うべきと思われる。
   void fetch() async {
     state = state.copyWith(textState: const AsyncValue.loading());
-    final data = ref.watch(repositoryProvider).getText();
-    final textState = await AsyncValue.guard(() async => data);
+    final Future<String> data = ref.watch(repositoryProvider).getText();
+    final AsyncValue<String> textState =
+        await AsyncValue.guard(() async => data);
     state = state.copyWith(textState: textState);
   }
 }

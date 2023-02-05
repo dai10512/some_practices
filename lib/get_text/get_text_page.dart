@@ -23,7 +23,7 @@ class _GetTextPageState extends ConsumerState<GetTextPage> {
 
   @override
   Widget build(context) {
-    final asyncValue = ref.watch(getTextPageModelProvider).textState;
+    final AsyncValue asyncValue = ref.watch(getTextPageModelProvider).textState;
 
     return Scaffold(
       appBar: AppBar(
