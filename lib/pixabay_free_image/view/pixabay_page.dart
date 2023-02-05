@@ -37,7 +37,6 @@ class PixabayPage extends ConsumerWidget {
   }
 
   Widget _gridViewBuilder(List data) {
-    
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

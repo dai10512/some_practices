@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:search_free_image/pokemon/viewModel/pokemon_page_model.dart';
+import '../viewModel/pokemon_page_model.dart';
 
 class PokemonPage extends ConsumerStatefulWidget {
   const PokemonPage({super.key});
